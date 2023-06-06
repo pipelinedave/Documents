@@ -29,17 +29,30 @@ else
 fi
 
 # make sure rpm-ostree is in idle state by now
-echo "Waiting for rpm-ostree to enter idle state..."
 wait_for_rpm_ostree
 
 # install openbox and chromium
-echo "Installing Openbox and Chromium..."
-if rpm-ostree install openbox chromium; then
-    echo "Openbox and Chromium installed successfully!"
+echo "Installing Openbox"
+if rpm-ostree install openbox; then
+    echo "Openbox installed successfully!"
 else
-    echo "Failed to install Openbox and Chromium!"
+    echo "Failed to install Openbox!"
     exit 1
 fi
+
+# make sure rpm-ostree is in idle state by now
+wait_for_rpm_ostree
+
+echo "Installing Chromium"
+if rpm-ostree install chromium; then
+    echo "Chromium installed successfully!"
+else
+    echo "Failed to install Chromium!"
+    exit 1
+fi
+
+# make sure rpm-ostree is in idle state by now
+wait_for_rpm_ostree
 
 # enable autologin in gnome display manager
 echo "Configuring autologin in GDM..."
