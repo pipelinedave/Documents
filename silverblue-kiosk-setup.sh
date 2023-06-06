@@ -62,18 +62,19 @@ fi
 
 # create a launchable desktop file for our kiosk session
 echo "Creating desktop file for kiosk session..."
-if echo "[Desktop Entry]\nName=Kiosk\nComment=Kiosk session\nExec=/usr/bin/gnome-session --session=kiosk\nTryExec=/usr/bin/gnome-session\nIcon=" > /usr/share/xsessions/kiosk.desktop; then
+if echo "[Desktop Entry]\nName=Kiosk\nComment=Kiosk session\nExec=/usr/bin/gnome-session --session=kiosk\nTryExec=/usr/bin/gnome-session\nIcon=" > /usr/local/share/xsessions/kiosk.desktop; then
     echo "Desktop file for kiosk session created successfully!"
 else
     echo "Failed to create desktop file for kiosk session!"
     exit 1
 fi
 
+
 # define the kiosk session /usr/share/gnome-sessions/kiosk.session
 echo "Defining kiosk session..."
 if echo "[GNOME Session]
 Name=kiosk
-RequiredComponents=kiosk-shell;org.gnome.Shell;org.gnome.SettingsDaemon.A11ySettings;org.gnome.SettingsDaemon.Color;org.gnome.SettingsDaemon.Datetime;org.gnome.SettingsDaemon.Housekeeping;org.gnome.SettingsDaemon.Keyboard;org.gnome.SettingsDaemon.MediaKeys;org.gnome.SettingsDaemon.Power;org.gnome.SettingsDaemon.PrintNotifications;org.gnome.SettingsDaemon.Rfkill;org.gnome.SettingsDaemon.ScreensaverProxy;org.gnome.SettingsDaemon.Sharing;org.gnome.SettingsDaemon.Smartcard;org.gnome.SettingsDaemon.Sound;org.gnome.SettingsDaemon.UsbProtection;org.gnome.SettingsDaemon.Wacom;org.gnome.SettingsDaemon.XSettings;" > /usr/share/gnome-sessions/kiosk.session; then
+RequiredComponents=kiosk-shell;org.gnome.Shell;org.gnome.SettingsDaemon.A11ySettings;org.gnome.SettingsDaemon.Color;org.gnome.SettingsDaemon.Datetime;org.gnome.SettingsDaemon.Housekeeping;org.gnome.SettingsDaemon.Keyboard;org.gnome.SettingsDaemon.MediaKeys;org.gnome.SettingsDaemon.Power;org.gnome.SettingsDaemon.PrintNotifications;org.gnome.SettingsDaemon.Rfkill;org.gnome.SettingsDaemon.ScreensaverProxy;org.gnome.SettingsDaemon.Sharing;org.gnome.SettingsDaemon.Smartcard;org.gnome.SettingsDaemon.Sound;org.gnome.SettingsDaemon.UsbProtection;org.gnome.SettingsDaemon.Wacom;org.gnome.SettingsDaemon.XSettings;" > /usr/local/share/gnome-sessions/kiosk.session; then
     echo "Kiosk session defined successfully!"
 else
     echo "Failed to define kiosk session!"
@@ -97,7 +98,7 @@ if echo "{
                "center": [],
                "right": ["aggregateMenu"]
     }
-}" > /usr/share/gnome-shell/modes/kiosk.json; then
+}" > /usr/local/share/gnome-shell/modes/kiosk.json; then
     echo "Kiosk-shell mode for gnome-shell created successfully!"
 else
     echo "Failed to create kiosk-shell mode for gnome-shell!"
