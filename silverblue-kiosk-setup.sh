@@ -30,7 +30,8 @@ fi
 
 # enable autologin in gnome display manager
 echo "Configuring autologin in GDM..."
-echo "AutomaticLoginEnable=true
+echo "[daemon]
+AutomaticLoginEnable=true
 AutomaticLogin=test
 DefaultSession=openbox" > /etc/gdm/custom.conf
 
@@ -43,13 +44,22 @@ fi
 
 echo "Configuring Openbox to autostart Chromium in kiosk mode..."
 mkdir -p /home/test/.config/openbox
-echo "chromium-browser --kiosk --no-first-run '\''https://khm.de'\'' &
+echo "chromium-browser --kiosk --no-first-run --password-store=basic '\''https://khm.de'\'' &
 " > /home/test/.config/openbox/autostart
 
 if [ $? -eq 0 ]; then
     echo "Openbox autostart configured successfully!"
 else
     echo "Failed to configure Openbox autostart!"
+    exit 1
+fi
+
+# set permissions for autostart script
+echo "Setting permissions for autostart script..."
+if chown -R test:test /home/test/.config; then
+    echo "Permissions set successfully!"
+else
+    echo "Failed to set permissions!"
     exit 1
 fi
 
