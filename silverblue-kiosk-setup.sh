@@ -42,6 +42,10 @@ else
 fi
 
 # make sure rpm-ostree is in idle state by now
+# This code waits for rpm-ostree to be ready to accept commands
+# from other scripts.
+wait_for_rpm_ostree
+
 wait_for_rpm_ostree
 
 echo "Installing Chromium"
@@ -66,7 +70,7 @@ fi
 
 echo "Configuring Openbox to autostart Chromium in kiosk mode..."
 mkdir -p /home/test/.config/openbox
-echo "chromium-browser --kiosk --no-first-run --password-store=basic '\''https://khm.de'\'' &
+echo "chromium-browser --kiosk --no-first-run --password-store=basic \"https://khm.de/bibliothek/\" &
 " > /home/test/.config/openbox/autostart
 
 if [ $? -eq 0 ]; then
