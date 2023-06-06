@@ -19,9 +19,9 @@ echo "AutomaticLoginEnable=true
 AutomaticLogin=test
 DefaultSession=openbox" > /etc/gdm/custom.conf
 
-mkdir -p /home/kiosk/.config/openbox
+mkdir -p /home/test/.config/openbox
 echo "chromium-browser --kiosk --no-first-run '\''https://khm.de'\'' &
-" > /home/kiosk/.config/openbox/autostart'
+" > /home/test/.config/openbox/autostart'
 
 # reboot the system
 systemctl reboot
