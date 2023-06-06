@@ -17,7 +17,6 @@ wait_for_rpm_ostree () {
     sleep 5
 }
 
-
 echo "Starting kiosk setup..."
 
 # update the system
@@ -42,10 +41,6 @@ else
 fi
 
 # make sure rpm-ostree is in idle state by now
-# This code waits for rpm-ostree to be ready to accept commands
-# from other scripts.
-wait_for_rpm_ostree
-
 wait_for_rpm_ostree
 
 echo "Installing Chromium"
