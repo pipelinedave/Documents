@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+﻿#!/bin/sh
 
 # ---------------------------------------------------------------------------
 # This script performs an update of the system and installs the necessary
@@ -14,6 +14,7 @@ wait_for_rpm_ostree () {
     while rpm-ostree status | grep -q 'Transaction'; do
         sleep 5
     done
+    sleep 5
 }
 
 
@@ -56,12 +57,7 @@ wait_for_rpm_ostree
 
 # enable autologin in gnome display manager
 echo "Configuring autologin in GDM..."
-echo "[daemon]
-AutomaticLoginEnable=true
-AutomaticLogin=test
-DefaultSession=openbox" > /etc/gdm/custom.conf
-
-if [ $? -eq 0 ]; then
+if sed -i '/\[daemon\]/a AutomaticLoginEnable=true\nAutomaticLogin=test\nDefaultSession=openbox' /etc/gdm/custom.conf; then
     echo "Autologin configured successfully!"
 else
     echo "Failed to configure autologin!"
