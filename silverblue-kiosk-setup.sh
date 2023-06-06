@@ -85,10 +85,10 @@ else
 fi
 
 # reboot the system
-echo "Rebooting the system..."
-if systemctl reboot; then
-    echo "System reboot initiated!"
-else
-    echo "Failed to initiate system reboot!"
-    exit 1
-fi
+# echo "Rebooting the system..."
+# if systemctl reboot; then
+#     echo "System reboot initiated!"
+# else
+#     echo "Failed to initiate system reboot!"
+#     exit 1
+# fi
