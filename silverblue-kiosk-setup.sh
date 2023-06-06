@@ -8,6 +8,15 @@
 # After installing the packages, it configures autologin in GDM and configures openbox to autostart chromium-browser in kiosk mode.
 # ---------------------------------------------------------------------------
 
+# Function to wait for rpm-ostree to become available
+wait_for_rpm_ostree () {
+    echo "Waiting for rpm-ostree to be available..."
+    while rpm-ostree status | grep -q 'Transaction'; do
+        sleep 5
+    done
+}
+
+
 echo "Starting kiosk setup..."
 
 # update the system
@@ -21,9 +30,7 @@ fi
 
 # make sure rpm-ostree is in idle state by now
 echo "Waiting for rpm-ostree to enter idle state..."
-while rpm-ostree status | grep -q "State: idle"; do
-    sleep 1
-done
+wait_for_rpm_ostree
 
 # install openbox and chromium
 echo "Installing Openbox and Chromium..."
