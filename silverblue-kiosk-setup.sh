@@ -19,6 +19,12 @@ else
     exit 1
 fi
 
+# make sure rpm-ostree is in idle state by now
+echo "Waiting for rpm-ostree to enter idle state..."
+while rpm-ostree status | grep -q "State: idle"; do
+    sleep 1
+done
+
 # install openbox and chromium
 echo "Installing Openbox and Chromium..."
 if rpm-ostree install openbox chromium; then
